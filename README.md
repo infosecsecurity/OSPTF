@@ -1,6 +1,7 @@
-# Warning!
+# Must READ
 - This Project is unfinished. ( unstable )
 - DO NOT ABUSE/EXPLOITING
+- GUI Project is not work. I'll finish at 12/25/2016
 
 # OSPTF ( CUI VERSION )
 - Open Source Penetration Test Framework
