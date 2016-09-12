@@ -1,0 +1,27 @@
+platform:
+    - x86
+    - x64
+
+environment:
+    matrix:
+        - VSVER: 14
+
+before_build:
+    - ps: >-
+        If ($env:Platform -Match "x86") {
+            $env:VCVARS_PLATFORM="x86"
+        } Else {
+            $env:VCVARS_PLATFORM="amd64"
+        }
+    - curl -L -o nasminst.exe http://libgd.blob.core.windows.net/nasm/nasm-2.07-installer.exe
+    - start /wait nasminst.exe /S
+    - ps: $env:path="C:\Program Files (x86)\nasm;$($env:path)"
+    - ps: $env:VSCOMNTOOLS=(Get-Content ("env:VS" + "$env:VSVER" + "0COMNTOOLS"))
+    - call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat" %VCVARS_PLATFORM%
+    - cmake -G"NMake Makefiles"
+
+build_script:
+    - nmake
+
+test_script:
+    - nmake test

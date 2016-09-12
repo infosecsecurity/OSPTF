@@ -1,0 +1,77 @@
+include_directories(../../include)
+
+add_library(
+    asn1
+
+    OBJECT
+
+    ameth_lib.c
+    asn1_err.c
+    asn1_gen.c
+    asn1_lib.c
+    asn1_par.c
+    asn_mime.c
+    asn_moid.c
+    asn_pack.c
+    a_bitstr.c
+    a_d2i_fp.c
+    a_digest.c
+    a_dup.c
+    a_i2d_fp.c
+    a_int.c
+    a_mbstr.c
+    a_object.c
+    a_octet.c
+    a_print.c
+    a_sign.c
+    a_strex.c
+    a_strnid.c
+    a_time.c
+    a_time_tm.c
+    a_type.c
+    a_utf8.c
+    a_verify.c
+    bio_asn1.c
+    bio_ndef.c
+    d2i_pr.c
+    d2i_pu.c
+    evp_asn1.c
+    f_int.c
+    f_string.c
+    i2d_pr.c
+    i2d_pu.c
+    nsseq.c
+    n_pkey.c
+    p5_pbe.c
+    p5_pbev2.c
+    p8_pkey.c
+    tasn_dec.c
+    tasn_enc.c
+    tasn_fre.c
+    tasn_new.c
+    tasn_prn.c
+    tasn_typ.c
+    tasn_utl.c
+    t_bitst.c
+    t_crl.c
+    t_pkey.c
+    t_req.c
+    t_spki.c
+    t_x509.c
+    t_x509a.c
+    x_algor.c
+    x_bignum.c
+    x_crl.c
+    x_exten.c
+    x_info.c
+    x_long.c
+    x_nx509.c
+    x_pkey.c
+    x_pubkey.c
+    x_req.c
+    x_sig.c
+    x_spki.c
+    x_val.c
+    x_x509.c
+    x_x509a.c
+)

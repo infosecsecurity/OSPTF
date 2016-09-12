@@ -1,0 +1,404 @@
+/*
+ * Copyright 2000-2016 The OpenSSL Project Authors. All Rights Reserved.
+ *
+ * Licensed under the OpenSSL license (the "License").  You may not use
+ * this file except in compliance with the License.  You can obtain a copy
+ * in the file LICENSE in the source distribution or at
+ * https://www.openssl.org/source/license.html
+ */
+
+#include <openssl/asn1.h>
+#include <openssl/asn1t.h>
+#include <openssl/ocsp.h>
+
+ASN1_SEQUENCE(OCSP_SIGNATURE) = {
+    ASN1_SIMPLE(OCSP_SIGNATURE, signatureAlgorithm, X509_ALGOR),
+    ASN1_SIMPLE(OCSP_SIGNATURE, signature, ASN1_BIT_STRING),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_SIGNATURE, certs, X509, 0)
+} ASN1_SEQUENCE_END(OCSP_SIGNATURE)
+
+OCSP_SIGNATURE *d2i_OCSP_SIGNATURE(OCSP_SIGNATURE **a, const uint8_t **in, long len)
+{
+    return (OCSP_SIGNATURE *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_SIGNATURE));
+}
+
+int i2d_OCSP_SIGNATURE(OCSP_SIGNATURE *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_SIGNATURE));
+}
+
+OCSP_SIGNATURE *OCSP_SIGNATURE_new(void)
+{
+    return (OCSP_SIGNATURE *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_SIGNATURE));
+}
+
+void OCSP_SIGNATURE_free(OCSP_SIGNATURE *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_SIGNATURE));
+}
+
+ASN1_SEQUENCE(OCSP_CERTID) = {
+    ASN1_SIMPLE(OCSP_CERTID, hashAlgorithm, X509_ALGOR),
+    ASN1_SIMPLE(OCSP_CERTID, issuerNameHash, ASN1_OCTET_STRING),
+    ASN1_SIMPLE(OCSP_CERTID, issuerKeyHash, ASN1_OCTET_STRING),
+    ASN1_SIMPLE(OCSP_CERTID, serialNumber, ASN1_INTEGER)
+} ASN1_SEQUENCE_END(OCSP_CERTID)
+
+OCSP_CERTID *d2i_OCSP_CERTID(OCSP_CERTID **a, const uint8_t **in, long len)
+{
+    return (OCSP_CERTID *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_CERTID));
+}
+
+int i2d_OCSP_CERTID(OCSP_CERTID *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_CERTID));
+}
+
+OCSP_CERTID *OCSP_CERTID_new(void)
+{
+    return (OCSP_CERTID *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_CERTID));
+}
+
+void OCSP_CERTID_free(OCSP_CERTID *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_CERTID));
+}
+
+ASN1_SEQUENCE(OCSP_ONEREQ) = {
+    ASN1_SIMPLE(OCSP_ONEREQ, reqCert, OCSP_CERTID),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_ONEREQ, singleRequestExtensions, X509_EXTENSION, 0)
+} ASN1_SEQUENCE_END(OCSP_ONEREQ)
+
+OCSP_ONEREQ *d2i_OCSP_ONEREQ(OCSP_ONEREQ **a, const uint8_t **in, long len)
+{
+    return (OCSP_ONEREQ *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_ONEREQ));
+}
+
+int i2d_OCSP_ONEREQ(OCSP_ONEREQ *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_ONEREQ));
+}
+
+OCSP_ONEREQ *OCSP_ONEREQ_new(void)
+{
+    return (OCSP_ONEREQ *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_ONEREQ));
+}
+
+void OCSP_ONEREQ_free(OCSP_ONEREQ *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_ONEREQ));
+}
+
+ASN1_SEQUENCE(OCSP_REQINFO) = {
+    ASN1_EXP_OPT(OCSP_REQINFO, version, ASN1_INTEGER, 0),
+    ASN1_EXP_OPT(OCSP_REQINFO, requestorName, GENERAL_NAME, 1),
+    ASN1_SEQUENCE_OF(OCSP_REQINFO, requestList, OCSP_ONEREQ),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_REQINFO, requestExtensions, X509_EXTENSION, 2)
+} ASN1_SEQUENCE_END(OCSP_REQINFO)
+
+OCSP_REQINFO *d2i_OCSP_REQINFO(OCSP_REQINFO **a, const uint8_t **in, long len)
+{
+    return (OCSP_REQINFO *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_REQINFO));
+}
+
+int i2d_OCSP_REQINFO(OCSP_REQINFO *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_REQINFO));
+}
+
+OCSP_REQINFO *OCSP_REQINFO_new(void)
+{
+    return (OCSP_REQINFO *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_REQINFO));
+}
+
+void OCSP_REQINFO_free(OCSP_REQINFO *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_REQINFO));
+}
+
+ASN1_SEQUENCE(OCSP_REQUEST) = {
+    ASN1_SIMPLE(OCSP_REQUEST, tbsRequest, OCSP_REQINFO),
+    ASN1_EXP_OPT(OCSP_REQUEST, optionalSignature, OCSP_SIGNATURE, 0)
+} ASN1_SEQUENCE_END(OCSP_REQUEST)
+
+OCSP_REQUEST *d2i_OCSP_REQUEST(OCSP_REQUEST **a, const uint8_t **in, long len)
+{
+    return (OCSP_REQUEST *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_REQUEST));
+}
+
+int i2d_OCSP_REQUEST(OCSP_REQUEST *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_REQUEST));
+}
+
+OCSP_REQUEST *OCSP_REQUEST_new(void)
+{
+    return (OCSP_REQUEST *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_REQUEST));
+}
+
+void OCSP_REQUEST_free(OCSP_REQUEST *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_REQUEST));
+}
+
+/* OCSP_RESPONSE templates */
+
+ASN1_SEQUENCE(OCSP_RESPBYTES) = {
+    ASN1_SIMPLE(OCSP_RESPBYTES, responseType, ASN1_OBJECT),
+    ASN1_SIMPLE(OCSP_RESPBYTES, response, ASN1_OCTET_STRING)
+} ASN1_SEQUENCE_END(OCSP_RESPBYTES)
+
+OCSP_RESPBYTES *d2i_OCSP_RESPBYTES(OCSP_RESPBYTES **a, const uint8_t **in, long len)
+{
+    return (OCSP_RESPBYTES *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_RESPBYTES));
+}
+
+int i2d_OCSP_RESPBYTES(OCSP_RESPBYTES *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_RESPBYTES));
+}
+
+OCSP_RESPBYTES *OCSP_RESPBYTES_new(void)
+{
+    return (OCSP_RESPBYTES *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_RESPBYTES));
+}
+
+void OCSP_RESPBYTES_free(OCSP_RESPBYTES *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_RESPBYTES));
+}
+
+ASN1_SEQUENCE(OCSP_RESPONSE) = {
+    ASN1_SIMPLE(OCSP_RESPONSE, responseStatus, ASN1_ENUMERATED),
+    ASN1_EXP_OPT(OCSP_RESPONSE, responseBytes, OCSP_RESPBYTES, 0)
+} ASN1_SEQUENCE_END(OCSP_RESPONSE)
+
+OCSP_RESPONSE *d2i_OCSP_RESPONSE(OCSP_RESPONSE **a, const uint8_t **in, long len)
+{
+    return (OCSP_RESPONSE *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_RESPONSE));
+}
+
+int i2d_OCSP_RESPONSE(OCSP_RESPONSE *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_RESPONSE));
+}
+
+OCSP_RESPONSE *OCSP_RESPONSE_new(void)
+{
+    return (OCSP_RESPONSE *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_RESPONSE));
+}
+
+void OCSP_RESPONSE_free(OCSP_RESPONSE *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_RESPONSE));
+}
+
+ASN1_CHOICE(OCSP_RESPID) = {
+    ASN1_EXP(OCSP_RESPID, value.byName, X509_NAME, 1),
+    ASN1_EXP(OCSP_RESPID, value.byKey, ASN1_OCTET_STRING, 2)
+} ASN1_CHOICE_END(OCSP_RESPID)
+
+OCSP_RESPID *d2i_OCSP_RESPID(OCSP_RESPID **a, const uint8_t **in, long len)
+{
+    return (OCSP_RESPID *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_RESPID));
+}
+
+int i2d_OCSP_RESPID(OCSP_RESPID *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_RESPID));
+}
+
+OCSP_RESPID *OCSP_RESPID_new(void)
+{
+    return (OCSP_RESPID *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_RESPID));
+}
+
+void OCSP_RESPID_free(OCSP_RESPID *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_RESPID));
+}
+
+ASN1_SEQUENCE(OCSP_REVOKEDINFO) = {
+    ASN1_SIMPLE(OCSP_REVOKEDINFO, revocationTime, ASN1_GENERALIZEDTIME),
+    ASN1_EXP_OPT(OCSP_REVOKEDINFO, revocationReason, ASN1_ENUMERATED, 0)
+} ASN1_SEQUENCE_END(OCSP_REVOKEDINFO)
+
+OCSP_REVOKEDINFO *d2i_OCSP_REVOKEDINFO(OCSP_REVOKEDINFO **a, const uint8_t **in, long len)
+{
+    return (OCSP_REVOKEDINFO *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_REVOKEDINFO));
+}
+
+int i2d_OCSP_REVOKEDINFO(OCSP_REVOKEDINFO *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_REVOKEDINFO));
+}
+
+OCSP_REVOKEDINFO *OCSP_REVOKEDINFO_new(void)
+{
+    return (OCSP_REVOKEDINFO *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_REVOKEDINFO));
+}
+
+void OCSP_REVOKEDINFO_free(OCSP_REVOKEDINFO *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_REVOKEDINFO));
+}
+
+ASN1_CHOICE(OCSP_CERTSTATUS) = {
+    ASN1_IMP(OCSP_CERTSTATUS, value.good, ASN1_NULL, 0),
+    ASN1_IMP(OCSP_CERTSTATUS, value.revoked, OCSP_REVOKEDINFO, 1),
+    ASN1_IMP(OCSP_CERTSTATUS, value.unknown, ASN1_NULL, 2)
+} ASN1_CHOICE_END(OCSP_CERTSTATUS)
+
+OCSP_CERTSTATUS *d2i_OCSP_CERTSTATUS(OCSP_CERTSTATUS **a, const uint8_t **in, long len)
+{
+    return (OCSP_CERTSTATUS *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_CERTSTATUS));
+}
+
+int i2d_OCSP_CERTSTATUS(OCSP_CERTSTATUS *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_CERTSTATUS));
+}
+
+OCSP_CERTSTATUS *OCSP_CERTSTATUS_new(void)
+{
+    return (OCSP_CERTSTATUS *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_CERTSTATUS));
+}
+
+void OCSP_CERTSTATUS_free(OCSP_CERTSTATUS *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_CERTSTATUS));
+}
+
+ASN1_SEQUENCE(OCSP_SINGLERESP) = {
+    ASN1_SIMPLE(OCSP_SINGLERESP, certId, OCSP_CERTID),
+    ASN1_SIMPLE(OCSP_SINGLERESP, certStatus, OCSP_CERTSTATUS),
+    ASN1_SIMPLE(OCSP_SINGLERESP, thisUpdate, ASN1_GENERALIZEDTIME),
+    ASN1_EXP_OPT(OCSP_SINGLERESP, nextUpdate, ASN1_GENERALIZEDTIME, 0),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_SINGLERESP, singleExtensions, X509_EXTENSION, 1)
+} ASN1_SEQUENCE_END(OCSP_SINGLERESP)
+
+OCSP_SINGLERESP *d2i_OCSP_SINGLERESP(OCSP_SINGLERESP **a, const uint8_t **in, long len)
+{
+    return (OCSP_SINGLERESP *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_SINGLERESP));
+}
+
+int i2d_OCSP_SINGLERESP(OCSP_SINGLERESP *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_SINGLERESP));
+}
+
+OCSP_SINGLERESP *OCSP_SINGLERESP_new(void)
+{
+    return (OCSP_SINGLERESP *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_SINGLERESP));
+}
+
+void OCSP_SINGLERESP_free(OCSP_SINGLERESP *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_SINGLERESP));
+}
+
+ASN1_SEQUENCE(OCSP_RESPDATA) = {
+    ASN1_EXP_OPT(OCSP_RESPDATA, version, ASN1_INTEGER, 0),
+    ASN1_SIMPLE(OCSP_RESPDATA, responderId, OCSP_RESPID),
+    ASN1_SIMPLE(OCSP_RESPDATA, producedAt, ASN1_GENERALIZEDTIME),
+    ASN1_SEQUENCE_OF(OCSP_RESPDATA, responses, OCSP_SINGLERESP),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_RESPDATA, responseExtensions, X509_EXTENSION, 1)
+} ASN1_SEQUENCE_END(OCSP_RESPDATA)
+
+OCSP_RESPDATA *d2i_OCSP_RESPDATA(OCSP_RESPDATA **a, const uint8_t **in, long len)
+{
+    return (OCSP_RESPDATA *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_RESPDATA));
+}
+
+int i2d_OCSP_RESPDATA(OCSP_RESPDATA *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_RESPDATA));
+}
+
+OCSP_RESPDATA *OCSP_RESPDATA_new(void)
+{
+    return (OCSP_RESPDATA *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_RESPDATA));
+}
+
+void OCSP_RESPDATA_free(OCSP_RESPDATA *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_RESPDATA));
+}
+
+ASN1_SEQUENCE(OCSP_BASICRESP) = {
+    ASN1_SIMPLE(OCSP_BASICRESP, tbsResponseData, OCSP_RESPDATA),
+    ASN1_SIMPLE(OCSP_BASICRESP, signatureAlgorithm, X509_ALGOR),
+    ASN1_SIMPLE(OCSP_BASICRESP, signature, ASN1_BIT_STRING),
+    ASN1_EXP_SEQUENCE_OF_OPT(OCSP_BASICRESP, certs, X509, 0)
+} ASN1_SEQUENCE_END(OCSP_BASICRESP)
+
+OCSP_BASICRESP *d2i_OCSP_BASICRESP(OCSP_BASICRESP **a, const uint8_t **in, long len)
+{
+    return (OCSP_BASICRESP *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_BASICRESP));
+}
+
+int i2d_OCSP_BASICRESP(OCSP_BASICRESP *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_BASICRESP));
+}
+
+OCSP_BASICRESP *OCSP_BASICRESP_new(void)
+{
+    return (OCSP_BASICRESP *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_BASICRESP));
+}
+
+void OCSP_BASICRESP_free(OCSP_BASICRESP *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_BASICRESP));
+}
+
+ASN1_SEQUENCE(OCSP_CRLID) = {
+    ASN1_EXP_OPT(OCSP_CRLID, crlUrl, ASN1_IA5STRING, 0),
+    ASN1_EXP_OPT(OCSP_CRLID, crlNum, ASN1_INTEGER, 1),
+    ASN1_EXP_OPT(OCSP_CRLID, crlTime, ASN1_GENERALIZEDTIME, 2)
+} ASN1_SEQUENCE_END(OCSP_CRLID)
+
+OCSP_CRLID *d2i_OCSP_CRLID(OCSP_CRLID **a, const uint8_t **in, long len)
+{
+    return (OCSP_CRLID *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_CRLID));
+}
+
+int i2d_OCSP_CRLID(OCSP_CRLID *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_CRLID));
+}
+
+OCSP_CRLID *OCSP_CRLID_new(void)
+{
+    return (OCSP_CRLID *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_CRLID));
+}
+
+void OCSP_CRLID_free(OCSP_CRLID *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_CRLID));
+}
+
+ASN1_SEQUENCE(OCSP_SERVICELOC) = {
+    ASN1_SIMPLE(OCSP_SERVICELOC, issuer, X509_NAME),
+    ASN1_SEQUENCE_OF_OPT(OCSP_SERVICELOC, locator, ACCESS_DESCRIPTION)
+} ASN1_SEQUENCE_END(OCSP_SERVICELOC)
+
+OCSP_SERVICELOC *d2i_OCSP_SERVICELOC(OCSP_SERVICELOC **a, const uint8_t **in, long len)
+{
+    return (OCSP_SERVICELOC *)ASN1_item_d2i((ASN1_VALUE **)a, in, len, ASN1_ITEM_rptr(OCSP_SERVICELOC));
+}
+
+int i2d_OCSP_SERVICELOC(OCSP_SERVICELOC *a, uint8_t **out)
+{
+    return ASN1_item_i2d((ASN1_VALUE *)a, out, ASN1_ITEM_rptr(OCSP_SERVICELOC));
+}
+
+OCSP_SERVICELOC *OCSP_SERVICELOC_new(void)
+{
+    return (OCSP_SERVICELOC *)ASN1_item_new(ASN1_ITEM_rptr(OCSP_SERVICELOC));
+}
+
+void OCSP_SERVICELOC_free(OCSP_SERVICELOC *a)
+{
+    ASN1_item_free((ASN1_VALUE *)a, ASN1_ITEM_rptr(OCSP_SERVICELOC));
+}

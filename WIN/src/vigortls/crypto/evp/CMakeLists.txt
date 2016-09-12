@@ -1,0 +1,64 @@
+include_directories(../../include)
+
+add_library(
+    evp
+
+    OBJECT
+
+    bio_b64.c
+    bio_enc.c
+    bio_md.c
+    c_all.c
+    c_allc.c
+    c_alld.c
+    digest.c
+    encode.c
+    evp_acnf.c
+    evp_aead.c
+    evp_enc.c
+    evp_err.c
+    evp_key.c
+    evp_lib.c
+    evp_pbe.c
+    evp_pkey.c
+    e_aes.c
+    e_aes_cbc_hmac_sha1.c
+    e_aes_cbc_hmac_sha256.c
+    e_camellia.c
+    e_chacha.c
+    e_chacha20poly1305.c
+    e_des.c
+    e_gost2814789.c
+    e_idea.c
+    e_null.c
+    e_old.c
+    e_rc2.c
+    e_rc4.c
+    e_rc4_hmac_md5.c
+    e_rc5.c
+    m_dss.c
+    m_dss1.c
+    m_ecdsa.c
+    m_gost2814789.c
+    m_gostr341194.c
+    m_md5.c
+    m_null.c
+    m_ripemd.c
+    m_sha1.c
+    m_sigver.c
+    m_streebog.c
+    m_wp.c
+    names.c
+    p5_crpt.c
+    p5_crpt2.c
+    pmeth_fn.c
+    pmeth_gn.c
+    pmeth_lib.c
+    p_dec.c
+    p_enc.c
+    p_lib.c
+    p_open.c
+    p_seal.c
+    p_sign.c
+    p_verify.c
+)
