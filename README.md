@@ -73,3 +73,30 @@
 - BetterAndroRAT
 - BetterRAT
 - PupY
+
+# OSPTF ( Windows *BETA* VERSION )
+
+## User-Interface
+- Modern UI
+- Support UWP( Coming Soon ) => run any Windows 10 device
+
+## Requirement
+- .Net Framework 4.0
+
+## Stay Anonymous
+- VPNGATE Profile Grab
+- FireFox ESR
+
+## Information Gathering
+- Coming Soon 
+
+## Vulnerability Assessment
+- Coming Soon
+
+## Exploitation
+- Coming Soon
+
+## Maintaining Access
+- QuasarRAT
+- AndroRAT
+- Stealth Keylogger
