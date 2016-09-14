@@ -1,0 +1,12 @@
+MODULE NAME
+- ACS == OSI 7 Jamming System ( Need Hard Ware )
+- CUI == Console User Interface
+- IGM == Information Gathering Module
+- LNX == LIBRARY FOR LINUX
+- MUI == Modern User Interface
+- NTK == Network ToolKit
+- PAL == PAYLOAD
+- RCN == RECON
+- RVS == Reverse Engineering
+- WIN == LIBRARY AND INSTALLER FOR WINDOWS
+- WUI == Web User Interface
