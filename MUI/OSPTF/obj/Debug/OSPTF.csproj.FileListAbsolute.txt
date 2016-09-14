@@ -1,0 +1,3 @@
+C:\Users\zeroworm\Documents\GitHub\OSPTF\MUI\OSPTF\obj\Debug\OSPTF.csprojResolveAssemblyReference.cache
+C:\Users\zeroworm\Documents\GitHub\OSPTF\MUI\OSPTF\obj\Debug\App.g.cs
+C:\Users\zeroworm\Documents\GitHub\OSPTF\MUI\OSPTF\obj\Debug\OSPTF_MarkupCompile.cache

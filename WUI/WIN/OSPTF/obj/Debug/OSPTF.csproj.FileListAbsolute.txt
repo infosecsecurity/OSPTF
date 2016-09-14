@@ -1,0 +1,17 @@
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\OSPTF.exe
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\OSPTF.pdb
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\MahApps.Metro.dll
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\MahApps.Metro.pdb
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\bin\Debug\MahApps.Metro.xml
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.csprojResolveAssemblyReference.cache
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\MainWindow.baml
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\App.baml
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\MainWindow.g.cs
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\App.g.cs
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF_MarkupCompile.cache
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.g.resources
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.Properties.Resources.resources
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.csproj.GenerateResource.Cache
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.exe
+C:\Users\zeroworm\Documents\GitHub\OSPTF\UI\WIN\OSPTF\obj\Debug\OSPTF.pdb
